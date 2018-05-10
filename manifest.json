@@ -1,0 +1,52 @@
+{
+
+  "manifest_version": 2,
+  "name": "BOM Data",
+  "short_name": "BOM Data",
+  "version": "0.0.1",
+  "homepage_url": "http://170.64.172.49/cae/#Tools",
+  "description": "Displays an address bar button with menu to list BOM data of the opened print.",
+  "icons": {
+    "48": "images/icon-48.png",
+    "96": "images/icon-96.png",
+    "128": "images/icon-128.png"
+  },
+  
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  
+  "applications": {
+    "gecko": {
+      "id": "BOMData@tenneco.com",
+      "strict_min_version": "50.0",
+      "update_url": "https://s3.us-east-2.amazonaws.com/tennecomilan/BOMData.json"
+    }
+  },
+    
+  "permissions": [
+    "theme",
+    "tabs",
+    "http://pafoap01/*"
+  ],  
+  
+  "page_action": {
+    "browser_style": true,
+    "show_matches": ["http://170.64.172.81/CLEVPRNT/*.pdf"],
+    "default_icon": {
+      "19": "images/monkey-19.png",
+      "38": "images/monkey-38.png"
+    },
+    "default_title": "BOM Data"
+   },
+   
+   "sidebar_action": {
+    "default_icon": {
+      "16": "images/monkey-16.png",
+      "32": "images/monkey-32.png"
+   },
+    "default_title": "BOM Data",
+    "default_panel": "sidebar/panel.html"
+   }
+
+}

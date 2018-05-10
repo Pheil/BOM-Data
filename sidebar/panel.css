@@ -1,0 +1,92 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+    background-color: #F4F7F8;
+}
+
+#desc {
+    height: 5%;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+}
+
+#Base {
+    margin: 0;
+    width: 100%;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 20px 1fr 20px 1fr;
+    justify-content: center;
+    align-content: center;
+}
+
+#Xref {
+    margin: 0;
+    margin-top: 10px;
+    border: 1px solid #DDE4E9;
+    width: 100%;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 20px repeat(2, 0.5fr);
+    justify-content: center;
+    align-content: center;
+    justify-items: stretch;
+}
+
+#BOM {
+    margin: 0;
+    border: 1px solid #DDE4E9;
+    width: 100%;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 20px repeat(2, 0.5fr);
+    justify-content: center;
+    align-content: center;
+}
+
+.box0 {
+    grid-column: 2;
+    background-color: #000;
+    color: #fff;
+    padding: 2px;
+    font-size: 90%;
+    text-align: center;
+    grid-column: 1 / span 2
+}
+
+.box1a {
+    background-color: #555;
+    color: #fff;
+    border-radius: 0px;
+    padding: 2px;
+    font-size: 90%;
+    text-align: center;
+}
+
+.box1b {
+    background-color: #eee;
+    color: #000;
+    border-radius: 0px;
+    padding: 5px;
+    font-size: 125%;
+    text-align: center;
+}
+
+.box2 {
+    background-color: #333;
+    color: #000;
+    border-radius: 0px;
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
