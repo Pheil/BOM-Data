@@ -24,11 +24,15 @@ function FSdisplay(terms) {
         folder = "PROCSPEC/";
         //Replace periods with underscores
         termsUP = termsUP.replace(/\./g, '_');
+        //Remove dashes
+        termsUP = termsUP.replace(/\-/g, '');
     }
     if (termcode2 == "TS") {
         folder = "TESTSPEC/";
         //Replace periods with underscores
         termsUP = termsUP.replace(/\./g, '_');
+        //Remove dashes
+        termsUP = termsUP.replace(/\-/g, '');        
     }
     if (termcode2 == "MR" || termcode3 == "RFP") {
         folder = "PROD/";
@@ -40,6 +44,8 @@ function FSdisplay(terms) {
         folder = "MATSPEC/";
         //Replace periods with underscores
         termsUP = termsUP.replace(/\./g, '_');
+        //Remove dashes
+        termsUP = termsUP.replace(/\-/g, '');
     }
     //First Cost group
     if (termcode3 == "ECE" || termcode2 == "CE") {
