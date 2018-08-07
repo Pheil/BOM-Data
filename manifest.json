@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "BOM Data",
   "short_name": "BOM Data",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage_url": "http://170.64.172.49/cae/#Tools",
   "description": "Displays an address bar button with menu to list BOM data of the opened print.",
   "icons": {
@@ -24,7 +24,7 @@
   
   "page_action": {
     "browser_style": true,
-    "show_matches": ["http://170.64.172.81/CLEVPRNT/*.pdf","http://millap01.na.ten/CLEVPRNT/*.pdf"],
+    "show_matches": ["http://170.64.172.81/CLEVPRNT/*.pdf","http://millap01.na.ten/CLEVPRNT/*.pdf","http://170.64.172.81/clevprnt/*.pdf"],
     "default_icon": {
       "19": "images/monkey-19.png",
       "38": "images/monkey-38.png"

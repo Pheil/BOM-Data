@@ -98,6 +98,7 @@ a:visited { color: #0c0 }  /* visited links   */
     width: 100%;
     z-index: 99;
     font-size: 200%;
+    text-shadow: 0 0 0.2em #FFF, 0 0 0.2em #87F, 0 0 0.2em #FFF;
     color:#000;
 }
 
