@@ -5,19 +5,18 @@ function FSdisplay(terms) {
         return "blank";
     }
 
-    var termsUP = terms.toUpperCase(); // Change case to all uppercase
-    var url_to_open = "http://170.64.172.81/"; // 1. The initial url
-    var termcount = terms.length; // Count number of characters to determine folder group
-    var termcode = String(termsUP).substring(0, 1); // Extract first 1 digit of search term
-    var termcode2 = String(termsUP).substring(0, 2); // Extract first 2 digits of search term
-    var termcode2b = String(termsUP).substring(2, 4); // Extract third and fourth digits of search term 
-    var termcode3 = String(termsUP).substring(0, 3); // Extract first 3 digits of search term
-    var termcode4 = String(termsUP).substring(4, 5); // Extract the character that would indicate if it is a B series number
-    var termcode4b = String(termsUP).substring(0, 4); // Extract first 4 digits of search term
-    var termcode6 = String(termsUP).substring(5, 6); // Extract the sixth character for use when full 11 digit code A series is entered
-    var termcode7 = String(termsUP).substring(5, 11); // Extract non GT part of inputed number when accidental entry for A series
-
-    var folder = "UNKNOWN"; // Sets initial folder value, for error checking
+    var termsUP = terms.toUpperCase();                  // Change case to all uppercase
+    var url_to_open = "http://tamef015vm26.amer.int.tenneco.com/";     // 1. The initial url
+    var termcount = terms.length;                       // Count number of characters to determine folder group
+    var termcode = String(termsUP).substring(0, 1);     // Extract first 1 digit of search term
+    var termcode2 = String(termsUP).substring(0, 2);    // Extract first 2 digits of search term
+    var termcode2b = String(termsUP).substring(2, 4);   // Extract third and fourth digits of search term 
+    var termcode3 = String(termsUP).substring(0, 3);    // Extract first 3 digits of search term
+    var termcode4 = String(termsUP).substring(4, 5);    // Extract the character that would indicate if it is a B series number
+    var termcode4b = String(termsUP).substring(0, 4);   // Extract first 4 digits of search term
+    var termcode6 = String(termsUP).substring(5, 6);    // Extract the sixth character for use when full 11 digit code A series is entered
+    var termcode7 = String(termsUP).substring(5, 11);   // Extract non GT part of inputed number when accidental entry for A series
+    var folder = "UNKNOWN";                             // Sets initial folder value, for error checking
 
     // If user is not searching for a part change to the correct type
     if (termcode2 == "PS") {
@@ -32,7 +31,7 @@ function FSdisplay(terms) {
         //Replace periods with underscores
         termsUP = termsUP.replace(/\./g, '_');
         //Remove dashes
-        termsUP = termsUP.replace(/\-/g, '');        
+        termsUP = termsUP.replace(/\-/g, '');
     }
     if (termcode2 == "MR" || termcode3 == "RFP") {
         folder = "PROD/";
@@ -299,8 +298,8 @@ function FSdisplay(terms) {
             if (termcode3 == "CB9") { // CB A Series Drawings
                 folder = "CLEVPRNT/900/";
             }
-        } else if (termcount == 11 || termcount == 15 || termcount == 7 || termcount == 13) // 11&15=Normal B series search, 7=TPT Mode search, 13=TR SDs
-        {
+        } else if (termcount == 11 || termcount == 15 || termcount == 7 || termcount == 13) {
+            // 11&15=Normal B series search, 7=TPT Mode search, 13=TR SDs
             if (termcode == "B") {
                 folder = "CLEVPRNT/B_Series/";
             } // Query is for B Series (TPT Mode)
@@ -338,7 +337,10 @@ function FSdisplay(terms) {
                 }
             } else if (termcode4 == "B" && termcode2 != "PT") {
                 folder = "CLEVPRNT/B_Series/";
-            } // Query is for B Series (Normal Mode)
+                // Query is for B Series (Normal Mode)
+            } else if (termcode2 == "AM") {
+                folder = "CLEVPRNT/AM/";
+            }
 
             if (termcode4 == "A" && termcode2 != "SD" && termcode2 != "TX" && termcode2 != "MT" && termcode2 != "AT") {
                 if (termsUP == "RM01A532460") {
@@ -380,7 +382,11 @@ function FSdisplay(terms) {
                 }
             }
             if (termcode2 == "SD") {
-                if (termcode6 == "0") { // Sets folder if it's a sales drawing of an A series part
+                if (termcode4b == "SDAM") {
+                    // New AM sales drawings
+                    folder = "CLEVPRNT/AM/";
+                } else if (termcode6 == "0") {
+                    // Old sales drawing of an A series parts
                     folder = "CLEVPRNT/000/";
                 } else if (termcode6 == "1") {
                     folder = "CLEVPRNT/100/";
@@ -404,7 +410,8 @@ function FSdisplay(terms) {
                 if (termcode4 == "B") {
                     folder = "CLEVPRNT/B_Series/";
                 }
-                if (termcode2b == "FS") { // Sets folders for torque rod sales drawings
+                if (termcode2b == "FS") {
+                    // Sets folders for torque rod sales drawings
                     folder = "CLEVPRNT/TorqueRods/FS/";
                 } else if (termcode2b == "FT") {
                     folder = "CLEVPRNT/TorqueRods/FT/";
@@ -444,7 +451,7 @@ function FSdisplay(terms) {
         return "unknown";
     }
     if (folder == "Design_Manual/") {
-        url_to_open2 = "http://170.64.172.49/groups/Drafting/" + folder + termsUP + ".pdf";
+        url_to_open2 = "http://tamef016.amer.int.tenneco.com/groups/Drafting/" + folder + termsUP + ".pdf";
     } else {
         url_to_open = url_to_open + folder; //2.  Adds folder location of file
         url_to_open = url_to_open + termsUP; //4.  Add the query to the url

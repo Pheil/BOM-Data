@@ -145,7 +145,7 @@ function getBaseData(taburl) {
     root_Part = taburl.match(/([^\/]+)(?=\.\w+$)/)[0];
 
     var xmlhttp = new XMLHttpRequest(),
-        url = "http://pafoap01:8888/pls/prod/ece_webquery.part_plant_results?p_part=" + root_Part + "&p_desc=&p_code=&p_plant=All&p_lifecycle_status=All&p_sort_by=pn.ta_part_no";
+        url = "http://pcdcforaxap01:8888/pls/prod/ece_webquery.part_plant_results?p_part=" + root_Part + "&p_desc=&p_code=&p_plant=All&p_lifecycle_status=All&p_sort_by=pn.ta_part_no";
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -163,6 +163,7 @@ function getBaseData(taburl) {
         if (tr.length == 1) {
             emptyID();
         } else {
+            var part_ID = ""
             var d = table.getElementsByTagName("tr")[1];
             var r = d.getElementsByTagName("td")[0],
                 desc = d.getElementsByTagName("td")[1].textContent,
@@ -171,7 +172,7 @@ function getBaseData(taburl) {
                 lifeCycle = d.getElementsByTagName("td")[4].textContent,
                 exportCont = d.getElementsByTagName("td")[5].textContent;
             if (r.childNodes[0].href){
-                var part_ID = gup('p_part_id', r.childNodes[0].href);            
+                part_ID = gup('p_part_id', r.childNodes[0].href);            
 
                 addBOM(part_ID);
                 addXref(part_ID);
@@ -187,6 +188,7 @@ function getBaseData(taburl) {
                 
             //Add data to panel
             document.getElementById("desc").textContent = desc;
+            document.getElementById("desc").setAttribute("title", "Oracle Part Description. (" + part_ID + ")");
             document.getElementById("GTC").textContent = GTC;
             if (plant.length == 1 ) {
                 document.getElementById("plant").textContent = "-";
@@ -207,7 +209,7 @@ function addBOM(ID) {
     var theTitles2 = [];
 
     var xmlhttp2 = new XMLHttpRequest(),
-        url2 = "http://pafoap01:8888/pls/prod/ece_webquery.bom_results?p_part_number=" + ID + "&p_view=BOM";
+        url2 = "http://pcdcforaxap01:8888/pls/prod/ece_webquery.bom_results?p_part_number=" + ID + "&p_view=BOM";
 
     xmlhttp2.onreadystatechange = function() {
         if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
@@ -288,7 +290,10 @@ function updateBOM(theBOM,theTitles) {
         if (last != "0") {
             var div1 = document.createElement("div");
             div1.setAttribute("id", "BOMName");
-            div1.innerHTML = theTitles[j] + "<span title='Automatic dash 0 addition.'> *</span>";
+            var span1 = document.createElement("span");
+            span1.setAttribute("title", "Automatic dash 0 addition.");
+            span1.textContent = theTitles[j] + "*";
+            div1.appendChild(span1);
             main.appendChild(div1);
         
             var div2 = document.createElement("div");
@@ -306,7 +311,7 @@ function updateBOM(theBOM,theTitles) {
 //Pull Xref
 function addXref(ID) {
     var xmlhttp2 = new XMLHttpRequest(),
-        url2 = "http://pafoap01:8888/pls/prod/ece_webquery.customer_cross_ref_results?p_part_number=" + ID + "&p_customer_part_number=All&p_customer=All";
+        url2 = "http://pcdcforaxap01:8888/pls/prod/ece_webquery.customer_cross_ref_results?p_part_number=" + ID + "&p_customer_part_number=All&p_customer=All";
 
     xmlhttp2.onreadystatechange = function() {
         if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
@@ -353,7 +358,7 @@ function addXref(ID) {
 
 function addEngChanges(ID) {
     var xmlhttp2 = new XMLHttpRequest(),
-        url2 = "http://pafoap01:8888/pls/prod/ece_webquery.part_no_ece?p_part_id=" + ID;
+        url2 = "http://pcdcforaxap01:8888/pls/prod/ece_webquery.part_no_ece?p_part_id=" + ID;
 
     xmlhttp2.onreadystatechange = function() {
         if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
@@ -396,7 +401,7 @@ function addEngChanges(ID) {
 
 function addUsedOn(ID) {
     var xmlhttp2 = new XMLHttpRequest(),
-        url2 = "http://pafoap01:8888/pls/prod/ece_webquery.bom_results?p_part_number=" + ID + "&p_view=USEDON";
+        url2 = "http://pcdcforaxap01:8888/pls/prod/ece_webquery.bom_results?p_part_number=" + ID + "&p_view=USEDON";
 
     xmlhttp2.onreadystatechange = function() {
         if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
@@ -448,7 +453,7 @@ function addUsedOn(ID) {
 
 function addSpecs(ID) {
     var xmlhttp2 = new XMLHttpRequest(),
-        url2 = "http://pafoap01:8888/pls/prod/ece_webquery.part_no_specifications?p_part_id=" + ID;
+        url2 = "http://pcdcforaxap01:8888/pls/prod/ece_webquery.part_no_specifications?p_part_id=" + ID;
 
     xmlhttp2.onreadystatechange = function() {
         if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
